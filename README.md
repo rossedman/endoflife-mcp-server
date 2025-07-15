@@ -30,7 +30,6 @@ Check out the examples below to see how to use the end-of-life MCP tool effectiv
 <details>
     <summary>Get Oldest Supported Versions Of Python</summary>
 
-    ```
     > Can you return the oldest versions of python that are still supported in endoflife
 
     ⏺ Here are the oldest Python versions that are still supported:
@@ -47,13 +46,11 @@ Check out the examples below to see how to use the end-of-life MCP tool effectiv
     - None of these versions are marked as Long Term Support (LTS)
     - Support for older versions typically lasts around 5 years
     - Newer versions (3.9-3.11) are still receiving updates
-    ```
 </details>
 
 <details>
     <summary>Get Versions Of etcd That Will Be Support In 6 Months</summary>
 
-    ```
     > We only upgrade every 6 months, what version of etcd will still be supported in 6 months when we upgrade, check endoflife
 
     ⏺ In 6 months, you will have two supported etcd versions:
@@ -72,13 +69,11 @@ Check out the examples below to see how to use the end-of-life MCP tool effectiv
     Note: etcd 3.4 will reach its End of Life on 2025-05-15, so it won't be recommended for use after that date.
 
     Recommendation: Plan to upgrade to either version 3.5 or 3.6 when you do your upgrade in 6 months.
-    ```
 </details>
 
 <details>
     <summary>Compare Kubernets And EKS Versions</summary>
 
-    ```
     > From endoflife, compare kubernetes and amazon-eks to see what versions overlap with support and will be supported at the same time
 
     ⏺ Comparison of Kubernetes and Amazon EKS support cycles:
@@ -98,7 +93,6 @@ Check out the examples below to see how to use the end-of-life MCP tool effectiv
         - Amazon EKS: Supported until 2025-07-23 (with extended support until 2026-07-23)
 
     Note: Amazon EKS typically provides extended support beyond the standard Kubernetes support cycle, giving users additional time to upgrade.
-    ```
 </details>
 
 ## Setup
