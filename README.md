@@ -8,8 +8,7 @@ Check out the examples below to see how to use the end-of-life MCP tool effectiv
 
 <details>
     <summary>Get Newest 5 Versions Of Kubernetes</summary>
-
-    ```
+    
     > Can you get the newest 5 version of the Kubernetes product in endoflife and make a markdown table of dates
 
     ⏺ Here's a markdown table of the 5 newest Kubernetes versions:
@@ -26,7 +25,6 @@ Check out the examples below to see how to use the end-of-life MCP tool effectiv
     - No versions are marked as Long Term Support (LTS)
     - Each version is typically supported for about 14-16 months
     - Latest patch releases are consistently dated 2025-06-17 for the top 4 versions
-    ```
 </details>
 
 <details>
