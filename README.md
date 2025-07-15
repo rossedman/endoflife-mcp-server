@@ -75,6 +75,32 @@ A server for the end-of-life MCP tool.
     ```
 </details>
 
+<details>
+    <summary>Compare Kubernets And EKS Versions</summary>
+
+    ```
+    > From endoflife, compare kubernetes and amazon-eks to see what versions overlap with support and will be supported at the same time
+
+    ⏺ Comparison of Kubernetes and Amazon EKS support cycles:
+
+    Overlapping Supported Versions (as of 2025-07-15):
+    1. 1.33:
+        - Kubernetes: Supported until 2026-06-28
+        - Amazon EKS: Supported until 2026-07-29 (with extended support until 2027-07-29)
+    2. 1.32:
+        - Kubernetes: Supported until 2026-02-28
+        - Amazon EKS: Supported until 2026-03-23 (with extended support until 2027-03-23)
+    3. 1.31:
+        - Kubernetes: Supported until 2025-10-28
+        - Amazon EKS: Supported until 2025-11-26 (with extended support until 2026-11-26)
+    4. 1.30:
+        - Kubernetes: Supported until 2025-06-28
+        - Amazon EKS: Supported until 2025-07-23 (with extended support until 2026-07-23)
+
+    Note: Amazon EKS typically provides extended support beyond the standard Kubernetes support cycle, giving users additional time to upgrade.
+    ```
+</details>
+
 ## Install
 
 ### Claude
