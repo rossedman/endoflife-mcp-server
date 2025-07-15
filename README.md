@@ -10,7 +10,7 @@ Check out the examples below to see how to use the end-of-life MCP tool effectiv
     <summary>Get Newest 5 Versions Of Kubernetes</summary>
 
     ```
-    >  Can you get the newest 5 version of the Kubernetes product in endoflife and make a markdown table of dates
+    > Can you get the newest 5 version of the Kubernetes product in endoflife and make a markdown table of dates
 
     ⏺ Here's a markdown table of the 5 newest Kubernetes versions:
 
@@ -125,3 +125,7 @@ uv sync
 ```bash
 claude mcp add -s user endoflife -- uv run --directory $(pwd) main.py
 ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
