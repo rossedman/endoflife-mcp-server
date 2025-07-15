@@ -1,8 +1,10 @@
 # endoflife-mcp-server
 
-A server for the end-of-life MCP tool.
+A server for the end-of-life MCP tool. Allows users to query software end-of-life information, including release dates, support timelines, and latest versions.
 
 ## Examples
+
+Check out the examples below to see how to use the end-of-life MCP tool effectively.
 
 <details>
     <summary>Get Newest 5 Versions Of Kubernetes</summary>
@@ -101,7 +103,22 @@ A server for the end-of-life MCP tool.
     ```
 </details>
 
-## Install
+## Setup
+
+### Clone
+
+```bash
+git clone https://github.com/rossedman/endoflife-mcp-server.git
+cd endoflife-mcp-server
+```
+
+### Install
+
+```bash
+uv venv
+source .venv/bin/activate
+uv sync
+```
 
 ### Claude
 
