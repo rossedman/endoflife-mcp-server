@@ -1,6 +1,6 @@
 # endoflife-mcp-server
 
-A server for the end-of-life MCP tool. Allows users to query software end-of-life information, including release dates, support timelines, and latest versions.
+A server for the end-of-life website. Allows users to query software end-of-life information, including release dates, support timelines, and latest versions.
 
 ## Examples
 
