@@ -1,4 +1,5 @@
 from typing import Any
+
 import httpx
 from mcp.server.fastmcp import FastMCP
 
@@ -82,9 +83,7 @@ async def product_get_cycle(product: str, cycle: str) -> dict[str, Any] | None:
     """
     try:
         async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"https://endoflife.date/api/{product}/{cycle}.json"
-            )
+            response = await client.get(f"https://endoflife.date/api/{product}/{cycle}.json")
             response.raise_for_status()
             return response.json()
     except httpx.HTTPStatusError as e:

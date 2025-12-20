@@ -8,3 +8,25 @@ dependencies = [
     "httpx>=0.28.1",
     "mcp[cli]>=1.9.1",
 ]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+exclude = [".venv", ".vulture_whitelist.py"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+]
+ignore = ["E501"]  # line too long (handled by formatter)
+
+[tool.vulture]
+paths = ["."]
+exclude = [".venv/", "build/", "dist/"]
+min_confidence = 80
