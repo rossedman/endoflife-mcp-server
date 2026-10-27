@@ -1,0 +1,66 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="brand.css">
+<style>
+  body { background: radial-gradient(700px 360px at 50% 0%, rgba(245,158,11,0.12), transparent 70%), var(--ink); }
+  .grid { mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, #000 20%, transparent 80%); }
+  .wrap { position: absolute; inset: 0; padding: 40px 48px; display: flex; flex-direction: column; }
+  .eyebrow { font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); font-weight: 700; }
+  h1 { margin-top: 8px; font-size: 34px; font-weight: 800; letter-spacing: -1px; }
+  h1 span { color: var(--brand); }
+  .flow { margin-top: 0; display: grid; grid-template-columns: 1fr 84px 1.25fr 84px 1fr; align-items: stretch; flex: 1; }
+  .node { background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 16px; padding: 22px 22px 20px; box-shadow: 0 24px 50px rgba(0,0,0,0.45); display: flex; flex-direction: column; }
+  .node.hero { border-color: color-mix(in srgb, var(--brand) 55%, var(--ink-3)); box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 60px rgba(245,158,11,0.12); }
+  .step { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand); }
+  .node h2 { margin-top: 6px; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+  .node p { margin-top: 8px; font-size: 15px; line-height: 1.5; color: var(--mist); }
+  .chips { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-size: 12.5px; padding: 3px 9px; border-radius: 999px; background: var(--ink-4); border: 1px solid var(--ink-3); color: var(--mist); }
+  .code { margin-top: auto; padding-top: 14px; }
+  .code div { background: var(--ink-4); border: 1px solid var(--ink-3); border-radius: 10px; padding: 10px 12px; font-size: 13px; line-height: 1.6; color: var(--cream); white-space: pre; }
+  .d { color: var(--dim); } .ok { color: var(--ok); } .w { color: var(--warn); } .e { color: var(--bad); } .p { color: var(--brand); }
+  .arrow { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 14px; color: var(--brand); }
+  .arrow svg { width: 34px; height: 14px; }
+  .arrow small { font-size: 11px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase; }
+  .steps { margin-top: 12px; list-style: none; }
+  .steps li { font-size: 14.5px; line-height: 1.45; color: var(--mist); padding: 5px 0 5px 22px; position: relative; }
+  .steps li::before { content: ""; position: absolute; left: 0; top: 11px; width: 8px; height: 8px; border-radius: 50%; background: var(--brand); }
+  .steps b { color: var(--cream); font-weight: 600; }
+</style></head>
+<body>
+  <div class="grid"></div>
+  <div class="wrap">
+    <div class="flow">
+      <div class="node">
+        <div class="step">1 · Your assistant</div>
+        <h2>Asks in plain words</h2>
+        <p>Claude Code, Claude Desktop or any MCP client reads the server's instructions and picks a tool for the question.</p>
+        <div class="chips"><span class="chip">stdio</span><span class="chip">streamable HTTP</span></div>
+        <div class="code mono"><div><span class="d">"Is Python 3.10 still supported?"</span>
+<span class="p">→</span> product_get_cycle
+    python, 3.10</div></div>
+      </div>
+      <div class="arrow"><svg viewBox="0 0 34 14"><path d="M0 7H30M24 1L31 7L24 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><small>MCP</small></div>
+      <div class="node hero">
+        <div class="step">2 · endoflife-mcp-server</div>
+        <h2>Checks, fetches, explains</h2>
+        <ul class="steps">
+          <li><b>Validates the name</b> before it reaches a URL: lowercase slug, no path tricks.</li>
+          <li><b>Resolves aliases</b> such as k8s and postgres.</li>
+          <li><b>Calls the API live.</b> No cache, so a date that changed upstream is already correct.</li>
+          <li><b>Suggests names</b> on a miss, so a typo gets the right product on the next try.</li>
+        </ul>
+        <div class="chips"><span class="chip">8 read-only tools</span><span class="chip">typed client</span></div>
+      </div>
+      <div class="arrow"><svg viewBox="0 0 34 14"><path d="M0 7H30M24 1L31 7L24 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><small>HTTPS</small></div>
+      <div class="node">
+        <div class="step">3 · endoflife.date</div>
+        <h2>The source of truth</h2>
+        <p>The community-maintained v1 API: 486 products, each with every release cycle and its support dates.</p>
+        <div class="chips"><span class="chip">no API key</span><span class="chip">open data</span></div>
+        <div class="code mono"><div><span class="d">isEol    </span><span class="e">true</span>
+<span class="d">eolFrom  </span><span class="w">2026-10-01</span>
+<span class="d">latest   </span>3.10.22</div></div>
+      </div>
+    </div>
+  </div>
+</body></html>

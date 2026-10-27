@@ -1,0 +1,53 @@
+name: Bug report
+description: A tool returned the wrong thing, failed, or the server didn't start.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. For security problems, use the [security policy](https://github.com/rossedman/endoflife-mcp-server/blob/main/SECURITY.md) instead of an issue. If the end-of-life dates themselves are wrong, report them to [endoflife.date](https://github.com/endoflife-date/endoflife.date/issues): this server passes them through unchanged.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The output of `endoflife-mcp-server --version`.
+      placeholder: 1.0.0
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Your MCP client and its version (for example `claude --version`), how you run the server (`uvx`, `uv tool`, Docker), the transport (stdio or streamable-http), your OS and Python version.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The prompt you gave your assistant, or the tool and arguments it called.
+      placeholder: |
+        1. Ask: "When does Python 3.12 go end-of-life?"
+        2. The assistant calls product_get_cycle with {"product": "python", "cycle": "3.12"}
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include the tool result or error message.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Server output from stderr, with `ENDOFLIFE_MCP_LOG_LEVEL=DEBUG` set if you can. Remove anything private first.
+      render: text

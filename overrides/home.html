@@ -1,0 +1,239 @@
+{#- The landing page. Everything renders in the tabs block, outside Material's
+    content grid, so sections can run edge to edge. Styles: docs/assets/site/landing.css.
+    Numbers (486 products, 8 tools, 9 categories, 88 tags) and every output line were
+    taken from real calls to endoflife.date on 2026-10-27. -#}
+{% extends "main.html" %}
+
+{% set gh = "https://github.com/rossedman/endoflife-mcp-server" %}
+{% set install = "uvx endoflife-mcp-server serve" %}
+{% set add_cmd = "claude mcp add -s user endoflife -- uvx endoflife-mcp-server serve" %}
+
+{% block tabs %}
+{{ super() }}
+<div class="lp">
+
+  <!-- Hero -->
+  <section class="lp-hero">
+    <div class="lp-grid" aria-hidden="true"></div>
+    <div class="lp-wrap lp-hero__inner">
+      <div>
+        <img class="lp-hero__logo" src="{{ 'assets/site/logo.svg' | url }}" alt="">
+        <p class="lp-kicker">rossedman/endoflife-mcp-server</p>
+        <h1 class="lp-title">Know when your stack<br><span>goes end-of-life.</span></h1>
+        <p class="lp-tagline">An MCP server that gives your AI assistant live support dates from endoflife.date. <b>Get the date, not a guess.</b></p>
+        <div class="lp-install">
+          <span class="lp-install__prompt">$</span>
+          <code>{{ install }}</code>
+          <button class="lp-copy" data-copy="{{ install }}" aria-label="Copy install command">
+            {% include ".icons/material/content-copy.svg" %}
+          </button>
+        </div>
+        <div class="lp-cta">
+          <a class="lp-btn lp-btn--primary" href="{{ 'getting-started/' | url }}">Get started {% include ".icons/material/arrow-right.svg" %}</a>
+          <a class="lp-btn" href="{{ 'how-it-works/' | url }}">{% include ".icons/material/cog-outline.svg" %} How it works</a>
+        </div>
+      </div>
+
+      <div class="lp-term" aria-label="Two real tool calls to endoflife-mcp-server and their results">
+        <div class="lp-term__bar"><i></i><i></i><i></i><span>MCP tool calls</span></div>
+        <div class="lp-term__body" data-typing>
+          <div><span class="p">→</span> <span class="c" data-type>product_get_cycle python 3.10</span></div>
+          <div><span class="d">  isEol     </span><span class="e">true</span></div>
+          <div><span class="d">  eolFrom   </span><span class="w">2026-10-01</span></div>
+          <div><span class="d">  latest    </span>3.10.22</div>
+          <div><span class="p">→</span> <span class="c" data-type>product_get_cycle python 3.14</span></div>
+          <div><span class="d">  isEol     </span><span class="ok">false</span></div>
+          <div><span class="d">  eolFrom   </span><span class="ok">2030-10-31</span></div>
+          <div><span class="p">→</span> <span class="c" data-type>product_get_all pyhton</span></div>
+          <div><span class="e">  no product 'pyhton'.</span></div>
+          <div><span class="d">  Did you mean: </span><span class="c">python</span>, photon, iphone<span class="lp-caret"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="lp-wrap lp-stats">
+      <li><b>486</b><span>products tracked</span></li>
+      <li><b>8</b><span>read-only tools</span></li>
+      <li><b>9</b><span>categories</span></li>
+      <li><b>88</b><span>tags to filter by</span></li>
+    </ul>
+  </section>
+
+  <!-- The problem -->
+  <section class="lp-section" id="problem">
+    <div class="lp-wrap lp-split">
+      <div>
+        <p class="lp-eyebrow">The problem</p>
+        <h2>Models guess dates.<br><span>The API doesn't.</span></h2>
+        <p class="lp-lede">Support dates move: a release gets extended, a cycle is cut short, a new one ships. A model answering from training data is months behind and sounds just as sure. This server lets it read the date from endoflife.date at the moment you ask.</p>
+        <ul class="lp-points">
+          <li>{% include ".icons/material/check-decagram-outline.svg" %} Every call is live: there is no cache to go stale</li>
+          <li>{% include ".icons/material/check-decagram-outline.svg" %} Dates arrive as ISO 8601 with explicit isEol flags</li>
+          <li>{% include ".icons/material/check-decagram-outline.svg" %} A wrong product name returns the right one to try</li>
+        </ul>
+      </div>
+      <div class="lp-stack">
+        <article class="lp-panel" aria-label="Real output for Python 3.10">
+          <div class="lp-panel__head">
+            <span class="lp-panel__id">python 3.10</span><span class="lp-pill lp-pill--bad">End of life</span>
+            <span class="lp-panel__meta">captured 2026-10-27</span>
+          </div>
+          <h3>Python 3.10</h3>
+          <div class="lp-panel__sub">Released 2021-10-04 · active support ended 2023-04-05</div>
+          <div class="lp-quote">Security support ended 2026-10-01. The last patch is 3.10.22.<small>product_get_cycle, read live from endoflife.date</small></div>
+        </article>
+        <article class="lp-panel" aria-label="Real output for Kubernetes 1.34">
+          <div class="lp-panel__head">
+            <span class="lp-panel__id">kubernetes 1.34</span><span class="lp-pill lp-pill--warn">Last day</span>
+            <span class="lp-panel__meta">captured 2026-10-27</span>
+          </div>
+          <h3>Kubernetes 1.34</h3>
+          <div class="lp-panel__sub">Released 2025-08-27 · active support ended 2026-08-27</div>
+          <div class="lp-well">eolFrom   2026-10-27
+latest    1.34.12
+isEol     false</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Three ways to ask -->
+  <section class="lp-section lp-section--alt">
+    <div class="lp-wrap">
+      <p class="lp-eyebrow">Three ways to ask</p>
+      <h2>One release, one product,<br><span>or the whole catalog.</span></h2>
+      <p class="lp-lede lp-lede--center">Your assistant picks the tool that fits the question. Start narrow for a yes or no, go wide to plan an upgrade, and browse when you don't know the name.</p>
+      <div class="lp-pillars">
+        <article class="lp-pillar" style="--accent: var(--brand)">
+          <h3>One release</h3><div class="when">"Is Python 3.10 still supported?"</div>
+          <p>The answer is two fields: whether support has ended, and when.</p>
+          <pre><code>product_get_cycle python 3.10
+→ isEol: true
+  eolFrom: 2026-10-01</code></pre>
+        </article>
+        <article class="lp-pillar" style="--accent: var(--info)">
+          <h3>A whole product</h3><div class="when">"What should we upgrade to?"</div>
+          <p>Every release cycle with its dates, newest first, ready to compare.</p>
+          <pre><code>product_get_all kubernetes
+→ 1.37  eol 2027-10-28
+  1.36  eol 2027-06-28
+  1.35  eol 2027-02-28</code></pre>
+        </article>
+        <article class="lp-pillar" style="--accent: var(--ok)">
+          <h3>The catalog</h3><div class="when">"What do you track?"</div>
+          <p>Browse by category or tag when you don't know the product's name.</p>
+          <pre><code>category_list_products database
+→ 27 products
+  mariadb, mysql, postgresql,
+  redis, valkey, ...</code></pre>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="lp-section">
+    <div class="lp-wrap">
+      <p class="lp-eyebrow">Why endoflife-mcp-server</p>
+      <h2>Small on purpose.<br><span>Right where it counts.</span></h2>
+      <div class="lp-features">
+        {% for icon, title, body in [
+          ("magnify", "Live, not remembered", "Each call reads endoflife.date directly. There is no cache and no database, so a date that changed upstream is already correct here."),
+          ("shield-lock", "Read-only", "All 8 tools are annotated read-only. They query a public API and cannot change anything on your machine."),
+          ("spellcheck", "Typos recover", "Ask for 'pyhton' and the error answers: Did you mean python, photon, iphone. The model retries without bothering you."),
+          ("swap-horizontal", "Aliases work", "k8s, postgres and eks resolve to the products endoflife.date knows, and names are checked before they reach a URL."),
+          ("lan-connect", "Local or over HTTP", "stdio for Claude Code and Claude Desktop, or streamable HTTP at /mcp when a client connects over the network."),
+          ("tune-variant", "Configurable", "Six settings from flags, ENDOFLIFE_MCP_* variables or a TOML file, with a fixed order: command line, then environment, then file."),
+        ] %}
+        <article class="lp-card">
+          <div class="lp-icon">{% include ".icons/material/" ~ icon ~ ".svg" %}</div>
+          <h3>{{ title }}</h3>
+          <p>{{ body }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick start -->
+  <section class="lp-section lp-section--alt" id="quick-start">
+    <div class="lp-wrap lp-split">
+      <div>
+        <p class="lp-eyebrow">Quick start</p>
+        <h2>Connected in<br><span>one command.</span></h2>
+        <p class="lp-lede">You need <a href="https://docs.astral.sh/uv/">uv</a>, which fetches Python for you. Claude Desktop and other clients use a short JSON snippet instead.</p>
+        <a class="lp-btn" href="{{ 'getting-started/' | url }}">{% include ".icons/material/book-open-page-variant-outline.svg" %} Full getting-started guide</a>
+      </div>
+      <ol class="lp-steps">
+        <li>
+          <h4>Add it to Claude Code</h4>
+          <pre class="lp-code lp-code--wrap"><button class="lp-copy" aria-label="Copy">{% include ".icons/material/content-copy.svg" %}</button><code><span class="p">$</span> {{ add_cmd }}</code></pre>
+        </li>
+        <li>
+          <h4>Check it connected</h4>
+          <p>It should be listed as connected.</p>
+          <pre class="lp-code"><button class="lp-copy" aria-label="Copy">{% include ".icons/material/content-copy.svg" %}</button><code><span class="p">$</span> claude mcp list</code></pre>
+        </li>
+        <li>
+          <h4>Ask</h4>
+          <p>In any Claude Code session, in plain words.</p>
+          <pre class="lp-code lp-code--wrap"><code><span class="d">&gt;</span> Which Kubernetes versions are still supported?</code></pre>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="lp-section">
+    <div class="lp-wrap">
+      <p class="lp-eyebrow">How it works</p>
+      <h2>Three hops,<br><span>nothing remembered.</span></h2>
+      <figure class="lp-figure">
+        <a href="{{ 'assets/how-it-works.png' | url }}"><img width="2560" height="880" src="{{ 'assets/how-it-works.png' | url }}" alt="Your assistant sends an MCP tool call to endoflife-mcp-server, which validates the name, resolves aliases and calls the endoflife.date API live, then returns fields such as isEol, eolFrom and latest." loading="lazy"></a>
+        <figcaption>Swipe to pan, tap to open the full-size diagram</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Docs grid -->
+  <section class="lp-section lp-section--alt">
+    <div class="lp-wrap">
+      <p class="lp-eyebrow">Documentation</p>
+      <h2>Go deeper.</h2>
+      <div class="lp-docs">
+        {% for path, name, blurb in [
+          ("getting-started/", "Getting started", "Install and connect a client"),
+          ("configuration/", "Configuration", "Settings, env vars, config file"),
+          ("tools/", "Using the tools", "Real calls and real output"),
+          ("how-it-works/", "How it works", "From question to answer"),
+          ("reference/tools/", "Tools reference", "All 8 tools and parameters"),
+          ("reference/cli/", "CLI reference", "Every command and option"),
+          ("reference/api/", "Python API", "The modules behind the server"),
+          ("contributing/", "Contributing", "Set up and send a change"),
+        ] %}
+        <a class="lp-doc" href="{{ path | url }}">
+          <b>{{ name }}</b><span>{{ blurb }}</span>
+          {% include ".icons/material/arrow-right.svg" %}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing call to action -->
+  <section class="lp-final">
+    <div class="lp-grid" aria-hidden="true"></div>
+    <div class="lp-wrap">
+      <img class="lp-final__logo" src="{{ 'assets/site/logo.svg' | url }}" alt="">
+      <h2>Stop guessing support dates.</h2>
+      <p class="lp-lede lp-lede--center">Free and open source under the MIT license.</p>
+      <div class="lp-cta lp-cta--center">
+        <a class="lp-btn lp-btn--primary" href="{{ 'getting-started/' | url }}">Get started {% include ".icons/material/arrow-right.svg" %}</a>
+        <a class="lp-btn" href="{{ gh }}">{% include ".icons/material/source-repository.svg" %} View on GitHub</a>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block content %}{% endblock %}

@@ -1,0 +1,24 @@
+name: Feature request
+description: Suggest a new tool, setting or transport, or a change to an existing one.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: The question you wanted your assistant to answer, and what got in the way.
+      placeholder: I wanted to know which of my dependencies go end-of-life this quarter, but ...
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: The tool, argument or behavior you would like. If it needs data endoflife.date doesn't publish, say so.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other MCP servers, prompts or workarounds you tried.
