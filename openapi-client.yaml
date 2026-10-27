@@ -1,0 +1,6 @@
+# openapi-python-client config for the endoflife.date client (`make generate`).
+project_name_override: endoflife_mcp_client
+package_name_override: client
+post_hooks:
+  - uv run --frozen python ../../../tools/mark_generated.py .
+  - uv run --frozen ruff format .

@@ -38,3 +38,11 @@ htmlcov/
 # Local development configurations
 .env.local
 .env.development.local
+# Docs build output (root only: docs/assets/site/ is source)
+/site/
+
+# Benchmarks and type checking
+.benchmarks/
+.mypy_cache/
+.hypothesis/
+coverage.xml
