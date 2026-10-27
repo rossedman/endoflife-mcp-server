@@ -45,8 +45,11 @@ generate-check: generate
 	@test -z "$$(git status --porcelain -- $(CLIENT_DIR))" || \
 		{ git status --short -- $(CLIENT_DIR); echo "Generated client is stale: run make generate"; exit 1; }
 
+# Regenerate the reference pages that come from the code: the CLI and the MCP tools.
+# docs/reference/api.md is hand-written (mkdocstrings directives) and not touched here.
 docs:
-	@echo "No generated reference pages yet."
+	uv run typer endoflife_mcp.cli utils docs --name endoflife-mcp-server --output docs/reference/cli.md
+	uv run python tools/gen_tool_docs.py
 
 docs-build: docs
 	uv run --group docs mkdocs build --strict
