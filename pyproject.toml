@@ -34,8 +34,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://rossedman.github.io/endoflife-mcp-server/"
-Documentation = "https://rossedman.github.io/endoflife-mcp-server/"
+Homepage = "https://rossedman.io/endoflife-mcp-server/"
+Documentation = "https://rossedman.io/endoflife-mcp-server/"
 Source = "https://github.com/rossedman/endoflife-mcp-server"
 Issues = "https://github.com/rossedman/endoflife-mcp-server/issues"
 Changelog = "https://github.com/rossedman/endoflife-mcp-server/releases"
@@ -83,7 +83,13 @@ ignore_errors = true
 [tool.pytest.ini_options]
 addopts = "--cov=endoflife_mcp --cov-branch --cov-report=term-missing --cov-fail-under=90"
 testpaths = ["tests"]
-markers = ["fuzz: Hypothesis property-based tests (run with -m fuzz)"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "fuzz: Hypothesis property-based tests (run with -m fuzz)",
+    "live: calls the real endoflife.date API (run with -m live)",
+]
+filterwarnings = ["error"]
 
 [tool.coverage.run]
 omit = ["src/endoflife_mcp/client/*"]
@@ -104,7 +110,9 @@ dev = [
     "mypy>=2.4.0",
     "openapi-spec-validator>=0.9.0",
     "pre-commit>=4.7.0",
-    "pytest>=9.2.0",
+    # pytest 9.2 removed Node._nodeid, which pytest-benchmark 5.3.0 still uses.
+    "pytest>=9.1.1,<9.2",
+    "pytest-asyncio>=1.4.1",
     "pytest-benchmark>=5.3.0",
     "pytest-cov>=7.1.0",
     "ruff>=0.17.3",

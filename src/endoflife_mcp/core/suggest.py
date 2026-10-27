@@ -24,11 +24,14 @@ def suggest_products(
     Returns:
         Up to ``limit`` canonical product names, best match first.
     """
-    canonical: dict[str, str] = {}
-    for product in products:
-        canonical.setdefault(product.name, product.name)
+    summaries = list(products)
+    # Canonical names first, so an alias can never shadow another product's real name.
+    canonical = {product.name: product.name for product in summaries}
+    for product in summaries:
         for alias in product.aliases:
             canonical.setdefault(alias, product.name)
+    if not canonical:
+        return []
     matches = difflib.get_close_matches(name, canonical, n=len(canonical), cutoff=cutoff)
     suggestions: list[str] = []
     for match in matches:

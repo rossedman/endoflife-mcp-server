@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/rossedman/endoflife-mcp-server/security/advisories/new
+    about: Report security problems privately, as described in the security policy.
+  - name: Wrong end-of-life data
+    url: https://github.com/endoflife-date/endoflife.date/issues
+    about: Dates and release data come from endoflife.date; fix them upstream.
+  - name: Docs
+    url: https://rossedman.io/endoflife-mcp-server/
+    about: Install steps, configuration and every tool.

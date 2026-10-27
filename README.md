@@ -1,123 +1,108 @@
-# endoflife-mcp-server
+<p align="center">
+  <img src="docs/assets/banner.png" alt="endoflife-mcp-server: end-of-life and support dates for your AI assistant" width="100%">
+</p>
 
-A server for the end-of-life website. Allows users to query software end-of-life information, including release dates, support timelines, and latest versions.
+<p align="center">
+  <a href="https://github.com/rossedman/endoflife-mcp-server/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/rossedman/endoflife-mcp-server/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://pypi.org/project/endoflife-mcp-server/"><img alt="PyPI" src="https://img.shields.io/pypi/v/endoflife-mcp-server"></a>
+  <a href="https://pypi.org/project/endoflife-mcp-server/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/endoflife-mcp-server"></a>
+  <a href="https://rossedman.io/endoflife-mcp-server/"><img alt="Docs" src="https://img.shields.io/badge/docs-rossedman.io-f59e0b"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/rossedman/endoflife-mcp-server"></a>
+  <a href="https://github.com/astral-sh/ruff"><img alt="Ruff" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json"></a>
+  <a href="https://github.com/astral-sh/uv"><img alt="uv" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json"></a>
+</p>
 
-## Examples
+An [MCP](https://modelcontextprotocol.io/) server for [endoflife.date](https://endoflife.date/). It lets Claude, or any other MCP client, answer questions like "is Kubernetes 1.31 still supported?" or "which Postgres versions get updates past next summer?" from live data on about 500 products, instead of from whatever the model remembers.
 
-Check out the examples below to see how to use the end-of-life MCP tool effectively.
+## Install
 
-<details>
-    <summary>Get Newest 5 Versions Of Kubernetes</summary>
-    
-    > Can you get the newest 5 version of the Kubernetes product in endoflife and make a markdown table of dates
+The server is a Python package. With [uv](https://docs.astral.sh/uv/), you don't need to install anything first:
 
-    ⏺ Here's a markdown table of the 5 newest Kubernetes versions:
-
-    | Version | Release Date | Latest Version | Latest Release Date | End of Life | Support Ends |
-    |---------|--------------|----------------|---------------------|-------------|--------------|
-    | 1.33    | 2025-04-23   | 1.33.2         | 2025-06-17          | 2026-06-28  | 2026-04-28   |
-    | 1.32    | 2024-12-11   | 1.32.6         | 2025-06-17          | 2026-02-28  | 2025-12-28   |
-    | 1.31    | 2024-08-13   | 1.31.10        | 2025-06-17          | 2025-10-28  | 2025-08-28   |
-    | 1.30    | 2024-04-17   | 1.30.14        | 2025-06-17          | 2025-06-28  | 2025-04-28   |
-    | 1.29    | 2023-12-13   | 1.29.15        | 2025-03-11          | 2025-02-28  | 2024-12-28   |
-
-    Key observations:
-    - No versions are marked as Long Term Support (LTS)
-    - Each version is typically supported for about 14-16 months
-    - Latest patch releases are consistently dated 2025-06-17 for the top 4 versions
-</details>
-
-<details>
-    <summary>Get Oldest Supported Versions Of Python</summary>
-
-    > Can you return the oldest versions of python that are still supported in endoflife
-
-    ⏺ Here are the oldest Python versions that are still supported:
-
-    | Version | Release Date | End of Life | Latest Version | Support Ends |
-    |---------|--------------|-------------|----------------|--------------|
-    | 3.8     | 2019-10-14   | 2024-10-07  | 3.8.20         | 2021-05-03   |
-    | 3.9     | 2020-10-05   | 2025-10-31  | 3.9.23         | 2022-05-17   |
-    | 3.10    | 2021-10-04   | 2026-10-31  | 3.10.18        | 2023-04-05   |
-    | 3.11    | 2022-10-24   | 2027-10-31  | 3.11.13        | 2024-04-01   |
-
-    Notes:
-    - Python 3.8 is the oldest version still receiving updates (until October 2024)
-    - None of these versions are marked as Long Term Support (LTS)
-    - Support for older versions typically lasts around 5 years
-    - Newer versions (3.9-3.11) are still receiving updates
-</details>
-
-<details>
-    <summary>Get Versions Of etcd That Will Be Support In 6 Months</summary>
-
-    > We only upgrade every 6 months, what version of etcd will still be supported in 6 months when we upgrade, check endoflife
-
-    ⏺ In 6 months, you will have two supported etcd versions:
-
-    1. etcd 3.5
-        - Release Date: 2021-06-15
-        - Latest Version: 3.5.21
-        - Latest Release Date: 2025-03-27
-        - Not End of Life
-    2. etcd 3.6
-        - Release Date: 2025-05-15
-        - Latest Version: 3.6.2
-        - Latest Release Date: 2025-07-10
-        - Not End of Life
-
-    Note: etcd 3.4 will reach its End of Life on 2025-05-15, so it won't be recommended for use after that date.
-
-    Recommendation: Plan to upgrade to either version 3.5 or 3.6 when you do your upgrade in 6 months.
-</details>
-
-<details>
-    <summary>Compare Kubernets And EKS Versions</summary>
-
-    > From endoflife, compare kubernetes and amazon-eks to see what versions overlap with support and will be supported at the same time
-
-    ⏺ Comparison of Kubernetes and Amazon EKS support cycles:
-
-    Overlapping Supported Versions (as of 2025-07-15):
-    1. 1.33:
-        - Kubernetes: Supported until 2026-06-28
-        - Amazon EKS: Supported until 2026-07-29 (with extended support until 2027-07-29)
-    2. 1.32:
-        - Kubernetes: Supported until 2026-02-28
-        - Amazon EKS: Supported until 2026-03-23 (with extended support until 2027-03-23)
-    3. 1.31:
-        - Kubernetes: Supported until 2025-10-28
-        - Amazon EKS: Supported until 2025-11-26 (with extended support until 2026-11-26)
-    4. 1.30:
-        - Kubernetes: Supported until 2025-06-28
-        - Amazon EKS: Supported until 2025-07-23 (with extended support until 2026-07-23)
-
-    Note: Amazon EKS typically provides extended support beyond the standard Kubernetes support cycle, giving users additional time to upgrade.
-</details>
-
-## Setup
-
-### Clone
-
-```bash
-git clone https://github.com/rossedman/endoflife-mcp-server.git
-cd endoflife-mcp-server
+```sh
+uvx endoflife-mcp-server serve
 ```
 
-### Install
+Or install it as a tool, with uv or pipx:
 
-```bash
-uv venv
-source .venv/bin/activate
-uv sync
+```sh
+uv tool install endoflife-mcp-server
+pipx install endoflife-mcp-server
 ```
 
-### Claude
+It needs Python 3.11 or newer; `uvx` downloads one if you don't have it.
 
-```bash
-claude mcp add -s user endoflife -- uv run --directory $(pwd) main.py
+## Quick start
+
+Add it to Claude Code:
+
+```sh
+claude mcp add -s user endoflife -- uvx endoflife-mcp-server serve
 ```
+
+Then ask:
+
+> We upgrade every six months. Which etcd versions will still be supported when we next upgrade?
+
+For Claude Desktop and other clients that use a JSON config, add:
+
+```json
+{
+  "mcpServers": {
+    "endoflife": {
+      "command": "uvx",
+      "args": ["endoflife-mcp-server", "serve"]
+    }
+  }
+}
+```
+
+To serve over HTTP instead of stdio, run `endoflife-mcp-server serve --transport streamable-http` and point your client at `http://127.0.0.1:8000/mcp`.
+
+## Tools
+
+| Tool | What it returns |
+| --- | --- |
+| `product_list_all` | The name of every product endoflife.date tracks |
+| `product_get_all` | A product with all of its release cycles and their dates |
+| `product_get_cycle` | One release cycle, such as `python` `3.12` |
+| `product_get_latest` | The newest release cycle of a product |
+| `category_list`, `category_list_products` | Categories (`lang`, `os`, `database`, ...) and the products in each |
+| `tag_list`, `tag_list_products` | Tags (`linux-distribution`, `amazon`, `cncf`, ...) and the products with each |
+
+Every tool is read-only. Aliases work (`k8s` is `kubernetes`), and an unknown name comes back as an error that suggests close matches (`pyhton` suggests `python`), so the model can correct itself. The [tools reference](https://rossedman.io/endoflife-mcp-server/reference/tools/) has every parameter.
+
+## Configuration
+
+Settings come from, highest precedence first: `serve` options, then `ENDOFLIFE_MCP_*` environment variables, then a TOML config file, then the defaults.
+
+| Setting | Option | Environment variable | Default |
+| --- | --- | --- | --- |
+| `transport` | `--transport` | `ENDOFLIFE_MCP_TRANSPORT` | `stdio` (or `streamable-http`) |
+| `host` | `--host` | `ENDOFLIFE_MCP_HOST` | `127.0.0.1` |
+| `port` | `--port` | `ENDOFLIFE_MCP_PORT` | `8000` |
+| `api_url` | `--api-url` | `ENDOFLIFE_MCP_API_URL` | `https://endoflife.date/api/v1` |
+| `timeout` | `--timeout` | `ENDOFLIFE_MCP_TIMEOUT` | `10` seconds |
+| `log_level` | | `ENDOFLIFE_MCP_LOG_LEVEL` | `WARNING` (logs go to stderr) |
+
+The config file is `$XDG_CONFIG_HOME/endoflife-mcp-server/config.toml` (usually `~/.config/endoflife-mcp-server/config.toml`), or the file passed with `endoflife-mcp-server --config <file> serve`:
+
+```toml
+timeout = 5
+log_level = "INFO"
+```
+
+See [Configuration](https://rossedman.io/endoflife-mcp-server/configuration/) in the docs for details.
+
+## Docs
+
+Full documentation is at **<https://rossedman.io/endoflife-mcp-server/>**: getting started, every tool, configuration, and the CLI and API reference.
+
+## Contributing
+
+Contributions are welcome. [CONTRIBUTING.md](CONTRIBUTING.md) covers setup (`uv sync --all-groups`), the one command that runs every check (`make check`), and the quality bars. Report security problems privately, as described in [SECURITY.md](SECURITY.md).
+
+The end-of-life data comes from [endoflife.date](https://endoflife.date/), a community project. If a date is wrong, [fix it there](https://github.com/endoflife-date/endoflife.date), and every user of this server gets the fix.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+[MIT](LICENSE)
