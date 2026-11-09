@@ -112,7 +112,7 @@ dev = [
     "openapi-spec-validator>=0.9.0",
     "pre-commit>=4.7.0",
     # pytest 9.2 removed Node._nodeid, which pytest-benchmark 5.3.0 still uses.
-    "pytest>=9.1.1,<9.2",
+    "pytest>=9.1.1,<9.3",
     "pytest-asyncio>=1.4.1",
     "pytest-benchmark>=5.3.0",
     "pytest-cov>=7.1.0",
