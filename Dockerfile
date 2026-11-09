@@ -4,7 +4,7 @@
 # or over HTTP:
 #   docker run --rm -p 8000:8000 -e ENDOFLIFE_MCP_TRANSPORT=streamable-http -e ENDOFLIFE_MCP_HOST=0.0.0.0 endoflife-mcp-server
 
-FROM ghcr.io/astral-sh/uv:0.13.6 AS uv
+FROM ghcr.io/astral-sh/uv:0.13.7 AS uv
 
 FROM python:3.13-slim-trixie@sha256:b3575dcf816cdacc5292df77a6e3e59b8941631078373a045efa2ac1e9c5c3b2 AS build
 COPY --from=uv /uv /bin/uv
